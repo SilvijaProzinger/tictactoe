@@ -1,0 +1,20 @@
+.form__title {
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    font-size: 1.6rem;
+    margin: 1rem 0 2rem 0;
+    background-color: transparent;
+    border: 1px solid #33414d;
+    padding: 1em 0 1em 0.5em;
+}
+ 
+form input:last-of-type {
+    margin-bottom: 2.6rem;
+}
