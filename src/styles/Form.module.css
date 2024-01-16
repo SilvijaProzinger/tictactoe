@@ -1,5 +1,5 @@
 .form__title {
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 form {
@@ -13,6 +13,7 @@ form input {
     background-color: transparent;
     border: 1px solid #33414d;
     padding: 1em 0 1em 0.5em;
+    color: #fff;
 }
  
 form input:last-of-type {

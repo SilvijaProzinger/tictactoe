@@ -4,6 +4,8 @@ import stylesButtons from "../styles/Buttons.module.css";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import Modal from "./Modal";
+import registerIconUrl from '../assets/icons8-register-30.png'
+import loginIconUrl from '../assets/icons8-login-50.png'
 
 function WelcomeScreen() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -39,10 +41,12 @@ function WelcomeScreen() {
             className={stylesButtons.outline}
             onClick={openRegisterModal}
           >
-            Register
+            <img src={registerIconUrl} width={20} height={20} alt="" />
+            <span>Register</span>
           </button>
           <button className={stylesButtons.primary} onClick={openLoginModal}>
-            Login
+            <img src={loginIconUrl} width={20} height={20} alt="" />
+            <span>Login</span>
           </button>
         </div>
       </div>

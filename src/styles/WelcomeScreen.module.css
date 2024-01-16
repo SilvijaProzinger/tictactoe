@@ -3,6 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(11, 11, 23, 0.70) 73.23%, rgba(11, 11, 23, 0.00) 100%);
+  padding: 40px;
+  height: 300px;
 }
 
 .title {
@@ -24,14 +27,32 @@
   margin-top: 3rem;
 }
 
-@media only screen and (max-width: 500px){
-    .title {
-      font-size: 4rem;
-    }
-    .subtitle {
-        font-size: 2rem;
-    }
-    .buttons__container {
-        flex-direction: column-reverse;
-    }
+.buttons__container button {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 4rem;
+  }
+  .subtitle {
+    font-size: 2rem;
+  }
+  .buttons__container {
+    flex-direction: column-reverse;
+  }
+  .container {
+    padding: 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .title {
+    font-size: 6.6rem;
+  }
+
+  .subtitle {
+    font-size: 3rem;
+  }
 }

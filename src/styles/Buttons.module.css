@@ -15,48 +15,53 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:not(:disabled) {
+  color: #fff;
+}
+
 .primary {
-    background-color: #3d45d6;
-    border-color: #3d45d6;
-    margin: 0 1.6rem;
+  background-color: #3d45d6;
+  border-color: #3d45d6;
+  margin: 0 1.6rem;
 }
 
 .primary:hover {
-    background-color: #696fd8;
-    border-color: #696fd8;
+  background-color: #696fd8;
+  border-color: #696fd8;
 }
 
 .secondary {
-    background-color: #cf2d2d;
-    border-color: #cf2d2d;
-    margin: 0 1.6rem;
+  background-color: #cf2d2d;
+  border-color: #cf2d2d;
+  margin: 0 1.6rem;
 }
 
 .secondary:hover {
-    background-color: #d14e4e;
-    border-color: #d14e4e;
+  background-color: #d14e4e;
+  border-color: #d14e4e;
 }
 
 .primary:last-of-type {
-    margin-left: 0;
-    margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .outline {
-    background-color: transparent;
-    border-color: white;
-    margin: 0 1.6rem;
+  background-color: transparent;
+  border-color: white;
+  margin: 0 1.6rem;
 }
 
-@media only screen and (max-width: 500px){
-    .primary, .secondary, .outline {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
-        max-width: 100%;
-    }
+@media (max-width: 500px) {
+  .primary,
+  .secondary,
+  .outline {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
 
-    .outline {
-        margin-top: 1rem;
-    }
+  .outline {
+    margin-top: 1rem;
+  }
 }
