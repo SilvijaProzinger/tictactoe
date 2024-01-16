@@ -8,7 +8,8 @@ type Props = {
 
 type AuthContextProps = {
   user: User | null;
-  error: string;
+  token: string;
+  authError: string;
   register: Register;
   login: Login;
   logout: Logout;
@@ -28,12 +29,12 @@ export const useAuth = (): AuthContextProps => {
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState('')
+  const [authError, setAuthError] = useState("");
+  const [token, setToken] = useState("");
   const apiUrl = "https://tictactoe.aboutdream.io/";
 
   const registerMutation = useMutation(
     (userData: User) => {
-      console.log(userData);
       return fetch(`${apiUrl}register/`, {
         method: "POST",
         headers: {
@@ -41,15 +42,57 @@ export const AuthProvider = ({ children }: Props) => {
         },
         body: JSON.stringify(userData),
       }).then((response) => {
-        if (!response.ok) throw new Error(response.statusText);
-        else if (response.status === 200) setUser(userData)
-        else return response
+        if (!response.ok) {
+          setAuthError(
+            "An error has occured. Please check your data and try again."
+          );
+          throw new Error(response.statusText);
+        } else if (response.status === 200) setUser(userData);
+        else return response;
       });
     },
     {
       onError: (error) => {
+        console.log(error);
         if (error instanceof Response && error.status === 403) {
-          setError('This username is already taken. Please enter a new one.')
+          setAuthError(
+            "This username is already taken. Please enter a new one."
+          );
+        } else {
+          //console.error('An error occurred:', error.message);
+        }
+      },
+    }
+  );
+
+  const loginMutation = useMutation(
+    (userData: User) => {
+      return fetch(`${apiUrl}login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }).then(async (response) => {
+        if (response.status === 200) {
+          const responseData = await response.json();
+          setUser(userData);
+          setToken(responseData.token); //to save token as a cookie
+        } else if (!response.ok) {
+          setAuthError(
+            "An error has occured. Please check your data and try again."
+          );
+          throw new Error(response.statusText);
+        } else return response;
+      });
+    },
+    {
+      onError: (error) => {
+        console.log(error);
+        if (error instanceof Response && error.status === 401) {
+          setAuthError(
+            "Authorization failed. Check your username and password and try again."
+          );
         } else {
           //console.error('An error occurred:', error.message);
         }
@@ -62,19 +105,18 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const login: Login = (userData) => {
-    setUser(userData);
+    loginMutation.mutate(userData);
   };
 
   const logout: Logout = () => {
     setUser(null);
+    setToken("");
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
-    <AuthContext.Provider value={{ user, error, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, token, authError, register, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

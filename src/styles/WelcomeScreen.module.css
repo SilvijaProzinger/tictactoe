@@ -7,7 +7,7 @@
 
 .title {
   font-family: "Caveat", cursive;
-  font-size: 5.2rem;
+  font-size: 6rem;
   margin: 1.6rem 0;
 }
 
@@ -25,6 +25,9 @@
 }
 
 @media only screen and (max-width: 500px){
+    .title {
+      font-size: 4rem;
+    }
     .subtitle {
         font-size: 2rem;
     }

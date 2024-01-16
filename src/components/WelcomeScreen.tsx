@@ -31,12 +31,12 @@ function WelcomeScreen() {
         <div>
           <h1 className={stylesWelcomeScreen.title}>TicTacToe</h1>
           <p className={stylesWelcomeScreen.subtitle}>
-            Welcome! Please register or login to continue
+            Welcome! Please register or login to continue.
           </p>
         </div>
         <div className={stylesWelcomeScreen.buttons__container}>
           <button
-            className={stylesButtons.secondary}
+            className={stylesButtons.outline}
             onClick={openRegisterModal}
           >
             Register

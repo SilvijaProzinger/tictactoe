@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.90)), url('../src/assets/bgvector.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .logo {
   font-family: 'Caveat', cursive;
 }
