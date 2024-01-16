@@ -1,5 +1,11 @@
+import Game from "./Game";
+
 function GamesList() {
-  return <></>;
+  return (
+    <>
+      <Game />
+    </>
+  );
 }
 
 export default GamesList;

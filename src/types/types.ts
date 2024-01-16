@@ -6,3 +6,8 @@ export type User = {
 export type Register = (userData: User) => void;
 export type Login = (userData: User) => void;
 export type Logout = () => void;
+
+export type Move = {
+  row: number;
+  col: number;
+}

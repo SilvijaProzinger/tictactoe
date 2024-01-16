@@ -78,6 +78,7 @@ export const AuthProvider = ({ children }: Props) => {
           const responseData = await response.json();
           setUser(userData);
           setToken(responseData.token); //to save token as a cookie
+          console.log(responseData.token)
         } else if (!response.ok) {
           setAuthError(
             "An error has occured. Please check your data and try again."
@@ -108,7 +109,7 @@ export const AuthProvider = ({ children }: Props) => {
     loginMutation.mutate(userData);
   };
 
-  const logout: Logout = () => {
+  const logout: Logout = () => { 
     setUser(null);
     setToken("");
   };
