@@ -11,3 +11,20 @@ export type Move = {
   row: number;
   col: number;
 }
+
+export type Squares = {
+  row: number;
+  col: number;
+  value: string;
+}
+
+export type ComboDirection = {
+  row: number;
+  col: number;
+};
+
+export type Combos = {
+  across: ComboDirection[][];
+  down: ComboDirection[][];
+  diagonal: ComboDirection[][];
+};

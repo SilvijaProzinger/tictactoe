@@ -8,7 +8,7 @@ type Props = {
 
 type AuthContextProps = {
   user: User | null;
-  token: string;
+  isTokenSet: boolean;
   authError: string;
   register: Register;
   login: Login;
@@ -30,7 +30,7 @@ export const useAuth = (): AuthContextProps => {
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState("");
-  const [token, setToken] = useState("");
+  const [isTokenSet, setIsTokenSet] = useState(!!sessionStorage.getItem("token"));
   const apiUrl = "https://tictactoe.aboutdream.io/";
 
   const registerMutation = useMutation(
@@ -65,6 +65,10 @@ export const AuthProvider = ({ children }: Props) => {
     }
   );
 
+  const saveTokenToSessionStorage = (token: string) => {
+    sessionStorage.setItem("token", token);
+  }
+
   const loginMutation = useMutation(
     (userData: User) => {
       return fetch(`${apiUrl}login/`, {
@@ -77,7 +81,8 @@ export const AuthProvider = ({ children }: Props) => {
         if (response.status === 200) {
           const responseData = await response.json();
           setUser(userData);
-          setToken(responseData.token); //to save token as a cookie
+          saveTokenToSessionStorage(responseData.token);
+          setIsTokenSet(true);
           console.log(responseData.token)
         } else if (!response.ok) {
           setAuthError(
@@ -111,12 +116,13 @@ export const AuthProvider = ({ children }: Props) => {
 
   const logout: Logout = () => { 
     setUser(null);
-    setToken("");
+    setIsTokenSet(false);
+    sessionStorage.removeItem('token');
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, token, authError, register, login, logout }}
+      value={{ user, authError, isTokenSet, register, login, logout }}
     >
       {children}
     </AuthContext.Provider>

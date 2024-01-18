@@ -5,9 +5,10 @@ type Props = {
   row: number;
   col: number;
   saveMove: (move: Move) => void;
+  value: string;
 };
 
-function Square({ row, col, saveMove }: Props) {
+function Square({ row, col, saveMove, value }: Props) {
   const handleClick = () => {
     const moveObj = {
       row: row,
@@ -17,9 +18,8 @@ function Square({ row, col, saveMove }: Props) {
   };
 
   return (
-    <button className={stylesBoard.square} onClick={handleClick}>
-      {row}
-      {col}
+    <button onClick={handleClick} className={`${value === 'X' ? stylesBoard.x : stylesBoard.o} ${stylesBoard.square}`}>
+      {value}
     </button>
   );
 }
