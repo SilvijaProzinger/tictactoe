@@ -83,7 +83,6 @@ export const AuthProvider = ({ children }: Props) => {
           setUser(userData);
           saveTokenToSessionStorage(responseData.token);
           setIsTokenSet(true);
-          console.log(responseData.token)
         } else if (!response.ok) {
           setAuthError(
             "An error has occured. Please check your data and try again."

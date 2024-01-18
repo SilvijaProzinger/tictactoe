@@ -1,9 +1,17 @@
 import Board from "./Board";
+import stylesButton from "../styles/Buttons.module.css";
 
-function Game() {
+type Props = {
+  handleExitGame: () => void;
+};
+
+function Game({ handleExitGame }: Props) {
   return (
     <>
       <Board />
+      <button className={stylesButton.secondary} onClick={handleExitGame}>
+        Exit game
+      </button>
     </>
   );
 }
