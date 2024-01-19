@@ -55,7 +55,7 @@ const combos = {
 };
 
 function Board() {
-  const { createNewGame } = useGame();
+  const { createNewGame, saveMoveToContext } = useGame();
   const [squares, setSquares] = useState<Squares[]>(
     Array(9)
       .fill(null)
@@ -89,6 +89,8 @@ function Board() {
       newSquares[index].value = isXNext ? "X" : "O";
       setSquares(newSquares);
       setIsNext(!isXNext);
+      //save move to game's data context
+      saveMoveToContext(move)
     }
   };
 
