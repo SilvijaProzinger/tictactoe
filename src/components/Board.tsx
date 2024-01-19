@@ -3,6 +3,7 @@ import stylesBoard from "../styles/Board.module.css";
 import Square from "./Square";
 import GameStatus from "./GameStatus";
 import { Combos, Move, Squares } from "../types/types";
+import { useGame } from "../context/GameContext";
 
 const combos = {
   across: [
@@ -54,11 +55,12 @@ const combos = {
 };
 
 function Board() {
+  const { createNewGame } = useGame();
   const [squares, setSquares] = useState<Squares[]>(
     Array(9)
       .fill(null)
       .map((_, index) => {
-        // Calculate row and col based on the index
+        // calculate row and col based on the index
         const row = Math.floor(index / 3);
         const col = index % 3;
         return { row, col, value: "" };
@@ -68,7 +70,7 @@ function Board() {
 
   const saveMove = (move: Move) => {
     if (
-      squares.some(
+      squares.some( 
         (square) =>
           square.row === move.row && square.col === move.col && square.value
       ) || winner
@@ -83,7 +85,7 @@ function Board() {
     );
 
     if (index !== -1) {
-      //update the new array's value property
+      // update the new array's value property
       newSquares[index].value = isXNext ? "X" : "O";
       setSquares(newSquares);
       setIsNext(!isXNext);
@@ -101,16 +103,21 @@ function Board() {
           values.every((value: string) => value === "O")
         ) {
           console.log(values[0])
-          return values[0]; //return the winner
+          return values[0]; // return the winner
         }
       }
     }
-    return null; //no winner
+    return null; // if there is a tie return no winner
   };
 
   const winner = useMemo(() => {
     return checkWinner(squares, combos);
   }, [squares]);
+
+  useEffect(() => { 
+    // save new game to context
+    createNewGame();
+  },[])
 
   return (
     <>

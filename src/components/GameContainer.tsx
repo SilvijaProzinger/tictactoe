@@ -9,6 +9,7 @@ function GameContainer() {
 
   const handleStartNewGame = () => {
     setOpenNewGame(true);
+
   };
 
   const handleExitGame = () => {
@@ -18,7 +19,7 @@ function GameContainer() {
   return (
     <>
       <Header />
-      <h2>List of games</h2>
+      {!openNewGame && <h2>List of games</h2>}
       <GamesList />
       {openNewGame && <Game handleExitGame={handleExitGame} />}
       {!openNewGame && (

@@ -28,3 +28,19 @@ export type Combos = {
   down: ComboDirection[][];
   diagonal: ComboDirection[][];
 };
+
+export type Player = {
+  id: number;
+  username: string;
+}
+
+export type Game = {
+  id: number;
+  board?: [ number[] ];
+  winner?: Player;
+  first_player: Player;
+  second_player: Player;
+  created?: string;
+  status: string;
+}
+

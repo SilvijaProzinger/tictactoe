@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { User, Register, Login, Logout } from "../types/types";
 import { useMutation } from "react-query";
 
