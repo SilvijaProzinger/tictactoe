@@ -19,3 +19,13 @@ This is a Tic Tac Toe game made with React. It utilizes a free [Tic-Tac-Toe API]
 * TypeScript
 * All icons are credited to Icons8
 * Tic-Tac-Toe API
+
+## To-add
+
+* list of finished/unfinished games from Tic-Tac-Toe API
+* the ability to finish an unfinished game fetched from the API
+* pagination
+* fix CORS error
+* handle token sessionStorage in a secure way
+* extract api url and similar variables to an .env file
+* transition and animation
