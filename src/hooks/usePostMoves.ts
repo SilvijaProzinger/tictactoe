@@ -3,7 +3,8 @@ import { Move } from '../types/types';
 
 const usePostMoves = (token: string, id: number) => {
   const postMoves = async (move: Move) => {
-    const response = await fetch(`/api/games/${id}/move/`, {
+    console.log(move)
+    const response = await fetch(`https://tictactoe.aboutdream.io/games/${id}/move/`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

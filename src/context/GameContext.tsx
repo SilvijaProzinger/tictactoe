@@ -31,7 +31,7 @@ export const GameProvider = ({ children }: Props) => {
     sessionStorage.getItem("token") ?? ""
   );
   const { postMoves } = usePostMoves(
-    sessionStorage.getItem("token") ?? "", 420 //to fetch id dynamically later
+    sessionStorage.getItem("token") ?? "", 1606 //to fetch id dynamically later
   );
 
   const createNewGame = async () => {
@@ -49,7 +49,8 @@ export const GameProvider = ({ children }: Props) => {
   useEffect(() => {
     const createNewMove = async () => {
       try {
-        await postMoves(moves[length - 1], );
+        console.log(moves)
+        await postMoves(moves[moves.length - 1], );
       } catch (error) {
         console.error("Error posting a move:", error);
       }

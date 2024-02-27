@@ -1,7 +1,8 @@
 import { useQuery } from 'react-query';
 
 const fetchGames = async (token: string) => {
-  const response = await fetch('/api/games/', {
+  const response = await fetch('https://tictactoe.aboutdream.io/games/', {
+    method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -21,7 +22,8 @@ const fetchGames = async (token: string) => {
 
 const useFetchGames = (token: string) => {
   return useQuery('games', () => fetchGames(token), {
-    enabled: false
+    enabled: !!token,
+    staleTime: 600000
   });
 };
 

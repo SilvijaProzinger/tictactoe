@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 
 const useCreateGame = (token: string) => {
   const createGame = async () => {
-    const response = await fetch('/api/games/', {
+    const response = await fetch('https://tictactoe.aboutdream.io/games/', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
