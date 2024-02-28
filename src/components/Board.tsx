@@ -5,6 +5,12 @@ import GameStatus from "./GameStatus";
 import { Combos, Move, Squares } from "../types/types";
 import { useGame } from "../context/GameContext";
 
+type Props = {
+  board: any;
+  first: string | null;
+  second: string | null;
+}
+
 const combos = {
   across: [
     [
@@ -54,18 +60,21 @@ const combos = {
   ],
 };
 
-function Board() {
+function Board({ board, first, second }: Props) {
   const { createNewGame, saveMoveToContext } = useGame();
-  const [squares, setSquares] = useState<Squares[]>(
-    Array(9)
-      .fill(null)
-      .map((_, index) => {
-        // calculate row and col based on the index
-        const row = Math.floor(index / 3);
-        const col = index % 3;
-        return { row, col, value: "" };
-      })
-  );
+  const [squares, setSquares] = useState<Squares[]>(() =>
+  board
+    ? board.flat().map((value, index) => ({
+        row: Math.floor(index / 3),
+        col: index % 3,
+        value: value ? (value === first ? 'X' : 'O') : null
+      }))
+    : Array(9).fill(null).map((_, index) => ({
+        row: Math.floor(index / 3),
+        col: index % 3,
+        value: null,
+      }))
+);
   const [isXNext, setIsNext] = useState(true);
 
   const saveMove = (move: Move) => {

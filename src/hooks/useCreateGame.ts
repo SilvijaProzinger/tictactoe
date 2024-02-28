@@ -1,8 +1,10 @@
 import { useMutation } from 'react-query';
 
+const apiUrl = import.meta.env.VITE_API;
+
 const useCreateGame = (token: string) => {
   const createGame = async () => {
-    const response = await fetch('https://tictactoe.aboutdream.io/games/', {
+    const response = await fetch(`${apiUrl}games/`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

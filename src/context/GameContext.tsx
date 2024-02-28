@@ -27,16 +27,16 @@ export const useGame = (): GameContextProps => {
 
 export const GameProvider = ({ children }: Props) => {
   const [moves, setMoves] = useState<Move[]>([]);
-  const { createGame, isLoading, isError } = useCreateGame(
+  /*const { createGame, isLoading, isError } = useCreateGame(
     sessionStorage.getItem("token") ?? ""
-  );
-  const { postMoves } = usePostMoves(
+  );*/
+  /*const { postMoves } = usePostMoves(
     sessionStorage.getItem("token") ?? "", 1606 //to fetch id dynamically later
-  );
+  );*/
 
   const createNewGame = async () => {
     try {
-      await createGame();
+      //await createGame();
     } catch (error) {
       console.error("Error creating game:", error);
     }
@@ -46,7 +46,7 @@ export const GameProvider = ({ children }: Props) => {
     setMoves((prevMoves) => [...prevMoves, move]);
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const createNewMove = async () => {
       try {
         console.log(moves)
@@ -57,7 +57,7 @@ export const GameProvider = ({ children }: Props) => {
     };
 
     if (moves) createNewMove();
-  }, [moves, postMoves]);
+  }, [moves, postMoves]);*/
 
   return (
     <GameContext.Provider

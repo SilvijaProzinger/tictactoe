@@ -1,10 +1,12 @@
 import { useMutation } from 'react-query';
 import { Move } from '../types/types';
 
+const apiUrl = import.meta.env.VITE_API;
+
 const usePostMoves = (token: string, id: number) => {
   const postMoves = async (move: Move) => {
     console.log(move)
-    const response = await fetch(`https://tictactoe.aboutdream.io/games/${id}/move/`, {
+    const response = await fetch(`${apiUrl}games/${id}/move/`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

@@ -2,12 +2,12 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from "vite-plugin-svgr"
 
-const apiTarget = 'http://tictactoe.aboutdream.io';
+//const apiTarget = 'http://tictactoe.aboutdream.io';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
-  server: {
+  /*server: {
     proxy: {
       '/api': {
         target: apiTarget,
@@ -15,5 +15,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
-  },
+  },*/
 })

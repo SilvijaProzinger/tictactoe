@@ -1,7 +1,9 @@
 import { useQuery } from 'react-query';
 
+const apiUrl = import.meta.env.VITE_API;
+
 const fetchGames = async (token: string) => {
-  const response = await fetch('https://tictactoe.aboutdream.io/games/', {
+  const response = await fetch(`${apiUrl}games/?limit=10&offset=140`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
