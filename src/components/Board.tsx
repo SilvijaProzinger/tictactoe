@@ -6,10 +6,11 @@ import { Combos, Move, Squares } from "../types/types";
 import { useGame } from "../context/GameContext";
 
 type Props = {
-  board: any;
-  first: string | null;
-  second: string | null;
-}
+  board?: any;
+  first?: string | null;
+  second?: string | null;
+  styles: string;
+};
 
 const combos = {
   across: [
@@ -60,29 +61,32 @@ const combos = {
   ],
 };
 
-function Board({ board, first, second }: Props) {
+function Board({ board, first, second, styles }: Props) {
   const { createNewGame, saveMoveToContext } = useGame();
   const [squares, setSquares] = useState<Squares[]>(() =>
-  board
-    ? board.flat().map((value, index) => ({
-        row: Math.floor(index / 3),
-        col: index % 3,
-        value: value ? (value === first ? 'X' : 'O') : null
-      }))
-    : Array(9).fill(null).map((_, index) => ({
-        row: Math.floor(index / 3),
-        col: index % 3,
-        value: null,
-      }))
-);
+    board
+      ? board.flat().map((value, index) => ({
+          row: Math.floor(index / 3),
+          col: index % 3,
+          value: value ? (value === first ? "X" : "O") : null,
+        }))
+      : Array(9)
+          .fill(null)
+          .map((_, index) => ({
+            row: Math.floor(index / 3),
+            col: index % 3,
+            value: null,
+          }))
+  );
   const [isXNext, setIsNext] = useState(true);
 
   const saveMove = (move: Move) => {
     if (
-      squares.some( 
+      squares.some(
         (square) =>
           square.row === move.row && square.col === move.col && square.value
-      ) || winner
+      ) ||
+      winner
     ) {
       return; // if the square has already been clicked return
     }
@@ -99,7 +103,7 @@ function Board({ board, first, second }: Props) {
       setSquares(newSquares);
       setIsNext(!isXNext);
       //save move to game's data context
-      saveMoveToContext(move)
+      saveMoveToContext(move);
     }
   };
 
@@ -113,7 +117,7 @@ function Board({ board, first, second }: Props) {
           values.every((value: string) => value === "X") ||
           values.every((value: string) => value === "O")
         ) {
-          console.log(values[0])
+          console.log(values[0]);
           return values[0]; // return the winner
         }
       }
@@ -125,26 +129,31 @@ function Board({ board, first, second }: Props) {
     return checkWinner(squares, combos);
   }, [squares]);
 
-  useEffect(() => { 
+  useEffect(() => {
     // save new game to context
     createNewGame();
-  },[])
+  }, []);
 
   return (
-    <>
-    <div className={stylesBoard.board}>
-      {squares.map((square) => (
-        <Square
-          key={`${square.row}-${square.col}`}
-          row={square.row}
-          col={square.col}
-          saveMove={saveMove}
-          value={square.value}
-        />
-      ))}
+    <div className={stylesBoard.board__container}>
+      <div
+        className={`${stylesBoard.board} ${
+          styles === "main" ? stylesBoard.main : stylesBoard.list
+        }`}
+      >
+        {squares.map((square) => (
+          <Square
+            key={`${square.row}-${square.col}`}
+            row={square.row}
+            col={square.col}
+            saveMove={saveMove}
+            value={square.value}
+            isListView={styles === 'list'}
+          />
+        ))}
+      </div>
+      {/*<GameStatus currentlyPlaying={isXNext ? 'X' : 'O'} winner={winner}/>*/}
     </div>
-    <GameStatus currentlyPlaying={isXNext ? 'X' : 'O'} winner={winner}/>
-    </>
   );
 }
 

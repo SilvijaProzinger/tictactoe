@@ -1,8 +1,8 @@
 import Game from "./Game";
 import useFetchGames from "../hooks/useFetchGames";
-import { useAuth } from "../context/AuthContext";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import Board from "./Board";
+import styles from "../styles/GamesList.module.css";
 
 function GamesList() {
   const storedToken = sessionStorage.getItem("token") ?? "";
@@ -12,17 +12,28 @@ function GamesList() {
     console.log(data);
 
     if (error) {
-      console.error('Error fetching games:', error);
+      console.error("Error fetching games:", error);
     }
   }, [data, error]);
 
-
   return (
-    <>
-    {data?.map((game) => {
-      return <Board board={game.board} first={game.first_player?.id || null} second={game.second_player?.id || null}/>
-    })}
-    </>
+    <div className={styles.list__container}>
+      {data?.map((game) => {
+        return (
+          <Board
+            key={game.id}
+            board={game.board}
+            first={game.first_player?.id || null}
+            second={game.second_player?.id || null}
+            gameStatus={game.status}
+            gameWinner={game.winner}
+            gamePlayers={game.play}
+            gameId={game.id}
+            styles="list"
+          />
+        );
+      })}
+    </div>
   );
 }
 

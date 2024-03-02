@@ -8,7 +8,7 @@ type Props = {
 function Game({ handleExitGame }: Props) {
   return (
     <>
-      <Board />
+      <Board styles="main"/>
       <button className={stylesButton.secondary} onClick={handleExitGame}>
         Exit game
       </button>

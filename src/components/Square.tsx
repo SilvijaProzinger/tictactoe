@@ -6,9 +6,10 @@ type Props = {
   col: number;
   saveMove: (move: Move) => void;
   value: string;
+  isListView: boolean;
 };
 
-function Square({ row, col, saveMove, value }: Props) {
+function Square({ row, col, saveMove, value, isListView }: Props) {
   const handleClick = () => {
     const moveObj = {
       row: row,
@@ -18,7 +19,7 @@ function Square({ row, col, saveMove, value }: Props) {
   };
 
   return (
-    <button onClick={handleClick} className={`${value === 'X' ? stylesBoard.x : stylesBoard.o} ${stylesBoard.square}`}>
+    <button onClick={handleClick} className={`${value === 'X' ? stylesBoard.x : stylesBoard.o} ${stylesBoard.square}`}  disabled={value !== "" || isListView}>
       {value}
     </button>
   );
